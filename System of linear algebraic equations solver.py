@@ -3,7 +3,7 @@ def solve(number_of_variables, number_of_equations):
     ans = []
     for i in range(number_of_equations):
         matrix.append(list(map(lambda x: float(x), input().split())))
-        if len(matrix[-1]) < number_of_variables + 1:
+        if len(matrix[-1]) != number_of_variables + 1:
             return "Некорректный ввод. Количество переменных не совпадает с количеством введённых коэффициентов."
     counter = 0
     while matrix[0][0] == 0:
