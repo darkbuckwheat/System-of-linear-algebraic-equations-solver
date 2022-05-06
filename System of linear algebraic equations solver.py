@@ -45,7 +45,7 @@ def independence_check(matrix):
             coefficients = []
             for k in range(len(matrix[i])):
                 coefficients.append(matrix[i][k] / indep[j][k])
-            if coefficients != coefficients[0] * len(coefficients):
+            if coefficients != [coefficients[0]] * len(coefficients):
                 indep.append(matrix[i])
     return len(indep)
 
