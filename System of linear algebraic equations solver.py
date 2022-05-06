@@ -11,13 +11,14 @@ def solve(number_of_variables, number_of_equations):
             check.append(matrix[j][i])
         if check == [0] * len(matrix):
             return "Неверно задана система уравнений. Во всех уравнениях один из коэффициентов равен 0."
+    if independence_check(matrix) < number_of_variables:
+        return "Система уравнений имеет бесконечное множество решений"
     while matrix[0][0] == 0:
         matrix = matrix[1:] + [matrix[0]]
     matrix = format(matrix, number_of_variables)[::-1]
     for i in range(len(matrix)):
         ans = ans + [(matrix[i][-1] - summ_of_string(ans, matrix[i])) / matrix[i][len(matrix[i]) - i - 2]]
     return ans[::-1]
-
 
 
 def format(matrix, number):
@@ -35,6 +36,18 @@ def summ_of_string(ans, string):
     for i in range(len(ans)):
         ot += string[len(string) - i - 2] * ans[i]
     return ot
+
+
+def independence_check(matrix):
+    indep = [matrix[0]]
+    for i in range(1, len(matrix)):
+        for j in range(len(indep)):
+            coefficients = []
+            for k in range(len(matrix[i])):
+                coefficients.append(matrix[i][k] / indep[j][k])
+            if coefficients != coefficients[0] * len(coefficients):
+                indep.append(matrix[i])
+    return len(indep)
 
 
 print(solve(int(input()), int(input())))
