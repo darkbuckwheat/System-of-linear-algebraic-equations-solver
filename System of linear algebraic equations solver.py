@@ -5,11 +5,12 @@ def solve(number_of_variables, number_of_equations):
         matrix.append(list(map(lambda x: float(x), input().split())))
         if len(matrix[-1]) != number_of_variables + 1:
             return "Некорректный ввод. Количество переменных не совпадает с количеством введённых коэффициентов."
-    for i in range(len(matrix)):
-        for j in range(len(matrix[0]) - 1):
-            check = list(map(lambda x: x[j], matrix[i]))
-            if check == [0] * len(matrix):
-                return "Неверно задана система уравнений. Во всех уравнениях один из коэффициентов равен 0."
+    for i in range(len(matrix[0]) - 1):
+        check = []
+        for j in range(len(matrix)):
+            check.append(matrix[j][i])
+        if check == [0] * len(matrix):
+            return "Неверно задана система уравнений. Во всех уравнениях один из коэффициентов равен 0."
     while matrix[0][0] == 0:
         matrix = matrix[1:] + [matrix[0]]
     matrix = format(matrix, number_of_variables)[::-1]
@@ -37,4 +38,3 @@ def summ_of_string(ans, string):
 
 
 print(solve(int(input()), int(input())))
-
